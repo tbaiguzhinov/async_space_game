@@ -1,18 +1,17 @@
-import time
 import curses
+import time
 
-from animations import fire, get_star, blink, animate_spaceship
+from animations import animate_spaceship, blink, fire, get_star
 
 TIC_TIMEOUT = 0.1
 
 
 def draw(canvas):
-    
     texts = []
-    for number in range(1,3):
+    for number in range(1, 3):
         with open(f'animation_images/rocket_frame_{number}.txt', 'r') as file:
             texts.append(file.read())
-    
+
     curses.curs_set(False)
     canvas.border()
     row_window, column_window = curses.window.getmaxyx(canvas)
@@ -26,7 +25,8 @@ def draw(canvas):
         fire(canvas, start_row=row_window-2, start_column=column_window/2)
     )
     coroutines.append(
-        animate_spaceship(canvas, texts=texts, row_window=row_window, column_window=column_window),
+        animate_spaceship(canvas, texts=texts,
+                          row_window=row_window, column_window=column_window),
     )
 
     while True:
