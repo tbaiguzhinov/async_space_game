@@ -32,7 +32,7 @@ async def blink(canvas, row, column, symbol='*'):
             await asyncio.sleep(0)
 
 
-def get_star(row, column):
+def get_random_star(row, column):
     """Get a random star symbol with random row and column."""
     star_symbols = '+*.:'
     return random.randint(BORDER_WIDTH, row-BORDER_WIDTH), \

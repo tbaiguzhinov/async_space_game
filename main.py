@@ -1,7 +1,7 @@
 import curses
 import time
 
-from animations import animate_spaceship, blink, fire, get_star
+from animations import animate_spaceship, blink, fire, get_random_star
 
 TIC_TIMEOUT = 0.1
 
@@ -18,7 +18,7 @@ def draw(canvas):
 
     coroutines = []
     for _ in range(200):
-        row, column, symbol = get_star(row_window, column_window)
+        row, column, symbol = get_random_star(row_window, column_window)
         coroutine = blink(canvas, row, column, symbol)
         coroutines.append(coroutine)
     coroutines.append(
