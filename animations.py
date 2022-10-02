@@ -3,6 +3,14 @@ import curses
 import random
 from itertools import cycle
 
+SPACE_KEY_CODE = 32
+LEFT_KEY_CODE = 260
+RIGHT_KEY_CODE = 261
+UP_KEY_CODE = 259
+DOWN_KEY_CODE = 258
+
+BORDER_WIDTH = 2
+
 
 async def blink(canvas, row, column, symbol='*'):
     """Display animation of a star with various blinking speed."""
@@ -27,8 +35,8 @@ async def blink(canvas, row, column, symbol='*'):
 def get_star(row, column):
     """Get a random star symbol with random row and column."""
     star_symbols = '+*.:'
-    return random.randint(2, row-2), \
-        random.randint(2, column-2), \
+    return random.randint(BORDER_WIDTH, row-BORDER_WIDTH), \
+        random.randint(BORDER_WIDTH, column-BORDER_WIDTH), \
         random.choice(star_symbols)
 
 
@@ -38,7 +46,7 @@ async def fire(
         start_column,
         rows_speed=-0.3,
         columns_speed=0
-        ):
+):
     """Display animation of gun shot, direction and speed can be specified."""
     row, column = start_row, start_column
 
@@ -117,7 +125,8 @@ async def animate_spaceship(canvas, texts, row_window, column_window):
     column = column_window/2
     for text in cycle(texts):
         height, width = get_frame_size(text)
-        rows_direction, columns_direction, space_pressed = read_controls(canvas)
+        rows_direction, columns_direction, space_pressed = read_controls(
+            canvas)
         if (row + rows_direction) > 0 and (row + height + rows_direction) < row_window:
             row += rows_direction
         if (column + columns_direction) > 0 and (column + width + columns_direction) < column_window:
@@ -125,13 +134,6 @@ async def animate_spaceship(canvas, texts, row_window, column_window):
         draw_frame(canvas, row, column, text, negative=False)
         await asyncio.sleep(0)
         draw_frame(canvas, row, column, text, negative=True)
-
-
-SPACE_KEY_CODE = 32
-LEFT_KEY_CODE = 260
-RIGHT_KEY_CODE = 261
-UP_KEY_CODE = 259
-DOWN_KEY_CODE = 258
 
 
 def read_controls(canvas):
