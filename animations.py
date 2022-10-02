@@ -75,14 +75,14 @@ async def fire(
         column += columns_speed
 
 
-def draw_frame(canvas, start_row, start_column, text, negative=False):
-    """Draw multiline text fragment on canvas.
+def draw_frame(canvas, start_row, start_column, frame, negative=False):
+    """Draw multiline frame fragment on canvas.
 
-    Erase text instead of drawing if negative=True is specified.
+    Erase frame instead of drawing if negative=True is specified.
     """
     rows_number, columns_number = canvas.getmaxyx()
 
-    for row, line in enumerate(text.splitlines(), round(start_row)):
+    for row, line in enumerate(frame.splitlines(), round(start_row)):
         if row < 0:
             continue
 
@@ -109,31 +109,31 @@ def draw_frame(canvas, start_row, start_column, text, negative=False):
             canvas.addch(row, column, symbol)
 
 
-def get_frame_size(text):
+def get_frame_size(frame):
     """Calculate size of multiline text fragment.
 
     Return pair — number of rows and colums.
     """
-    lines = text.splitlines()
+    lines = frame.splitlines()
     rows = len(lines)
     columns = max([len(line) for line in lines])
     return rows, columns
 
 
-async def animate_spaceship(canvas, texts, row_window, column_window):
+async def animate_spaceship(canvas, frames, row_window, column_window):
     row = row_window/2
     column = column_window/2
-    for text in cycle(texts):
-        height, width = get_frame_size(text)
+    for frame in cycle(frames):
+        height, width = get_frame_size(frame)
         rows_direction, columns_direction, space_pressed = read_controls(
             canvas)
         if (row + rows_direction) > 0 and (row + height + rows_direction) < row_window:
             row += rows_direction
         if (column + columns_direction) > 0 and (column + width + columns_direction) < column_window:
             column += columns_direction
-        draw_frame(canvas, row, column, text, negative=False)
+        draw_frame(canvas, row, column, frame, negative=False)
         await asyncio.sleep(0)
-        draw_frame(canvas, row, column, text, negative=True)
+        draw_frame(canvas, row, column, frame, negative=True)
 
 
 def read_controls(canvas):

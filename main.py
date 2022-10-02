@@ -7,10 +7,10 @@ TIC_TIMEOUT = 0.1
 
 
 def draw(canvas):
-    texts = []
-    for number in range(1, 3):
-        with open(f'animation_sprites/rocket_frame_{number}.txt', 'r') as file:
-            texts.append(file.read())
+    frames = []
+    for frame in range(1, 3):
+        with open(f'animation_sprites/rocket_frame_{frame}.txt', 'r') as file:
+            frames.append(file.read())
 
     curses.curs_set(False)
     canvas.border()
@@ -25,7 +25,7 @@ def draw(canvas):
         fire(canvas, start_row=row_window-2, start_column=column_window/2)
     )
     coroutines.append(
-        animate_spaceship(canvas, texts=texts,
+        animate_spaceship(canvas, frames=frames,
                           row_window=row_window, column_window=column_window),
     )
 
