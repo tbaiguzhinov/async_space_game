@@ -121,15 +121,17 @@ def get_frame_size(frame):
 
 
 async def animate_spaceship(canvas, frames, row_window, column_window):
-    row = row_window/2
-    column = column_window/2
+    row = row_window / 2
+    column = column_window / 2
     for frame in cycle(frames):
         height, width = get_frame_size(frame)
         rows_direction, columns_direction, space_pressed = read_controls(
             canvas)
-        if (row + rows_direction) > 0 and (row + height + rows_direction) < row_window:
+        if (row + rows_direction) > 0 \
+                and (row + height + rows_direction) < row_window:
             row += rows_direction
-        if (column + columns_direction) > 0 and (column + width + columns_direction) < column_window:
+        if (column + columns_direction) > 0 \
+                and (column + width + columns_direction) < column_window:
             column += columns_direction
         draw_frame(canvas, row, column, frame, negative=False)
         await asyncio.sleep(0)
