@@ -9,7 +9,7 @@ TIC_TIMEOUT = 0.1
 def draw(canvas):
     texts = []
     for number in range(1, 3):
-        with open(f'animation_images/rocket_frame_{number}.txt', 'r') as file:
+        with open(f'animation_sprites/rocket_frame_{number}.txt', 'r') as file:
             texts.append(file.read())
 
     curses.curs_set(False)
