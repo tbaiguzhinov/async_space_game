@@ -1,5 +1,6 @@
 import curses
 import time
+import random
 
 from animations import animate_spaceship, blink, fire, get_random_star
 
@@ -19,7 +20,8 @@ def draw(canvas):
     coroutines = []
     for _ in range(200):
         row, column, symbol = get_random_star(row_window, column_window)
-        coroutine = blink(canvas, row, column, symbol)
+        offset_tics = [random.randint(1, offset) for offset in [20, 3, 5, 3]]
+        coroutine = blink(canvas, row, column, symbol, offset_tics)
         coroutines.append(coroutine)
     coroutines.append(
         fire(canvas, start_row=row_window-2, start_column=column_window/2)

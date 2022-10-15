@@ -11,24 +11,18 @@ DOWN_KEY_CODE = 258
 BORDER_WIDTH = 2
 
 
-async def blink(canvas, row, column, symbol='*'):
+async def blink(canvas, row, column, symbol='*', offset_tics):
     """Display animation of a star with various blinking speed."""
     while True:
-        canvas.addstr(row, column, symbol, curses.A_DIM)
-        for _ in range(random.randint(1, 20)):
-            await asyncio.sleep(0)
-
-        canvas.addstr(row, column, symbol)
-        for _ in range(random.randint(1, 3)):
-            await asyncio.sleep(0)
-
-        canvas.addstr(row, column, symbol, curses.A_BOLD)
-        for _ in range(random.randint(1, 5)):
-            await asyncio.sleep(0)
-
-        canvas.addstr(row, column, symbol)
-        for _ in range(random.randint(1, 3)):
-            await asyncio.sleep(0)
+        for index, offset_tic in enumerate(offset_tics):
+            if index == 0:
+                canvas.addstr(row, column, symbol, curses.A_DIM)
+            elif index == 2:
+                canvas.addstr(row, column, symbol, curses.A_BOLD)
+            else:
+                canvas.addstr(row, column, symbol)
+            for _ in range(offset_tic):
+                await asyncio.sleep(0)
 
 
 def get_random_star(row, column):
