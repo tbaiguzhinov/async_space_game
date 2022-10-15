@@ -9,8 +9,8 @@ TIC_TIMEOUT = 0.1
 
 def draw(canvas):
     frames = []
-    for frame in range(1, 3):
-        with open(f'animation_sprites/rocket_frame_{frame}.txt', 'r') as file:
+    for sprite in range(1, 3):
+        with open(f'animation_sprites/rocket_frame_{sprite}.txt', 'r') as file:
             frames.append(file.read())
 
     curses.curs_set(False)
