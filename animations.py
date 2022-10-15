@@ -113,13 +113,13 @@ def get_frame_size(frame):
     return rows, columns
 
 
-async def animate_spaceship(canvas, frames, row_window, column_window):
-    row = row_window / 2
-    column = column_window / 2
+async def animate_spaceship(canvas, frames, window_rows, window_columns):
+    row = window_rows / 2
+    column = window_columns / 2
     for frame in cycle(frames):
         height, width = get_frame_size(frame)
-        row_limit = row_window - height
-        column_limit = column_window - width
+        row_limit = window_rows - height
+        column_limit = window_columns - width
         for _ in range(2):
             rows_direction, columns_direction, space = read_controls(canvas)
             next_row = row + rows_direction

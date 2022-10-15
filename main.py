@@ -15,23 +15,23 @@ def draw(canvas):
 
     curses.curs_set(False)
     canvas.border()
-    row_window, column_window = curses.window.getmaxyx(canvas)
+    window_rows, window_columns = curses.window.getmaxyx(canvas)
 
     coroutines = []
     for _ in range(200):
-        row, column, symbol = get_random_star_params(row_window, column_window)
+        row, column, symbol = get_random_star_params(window_rows, window_columns)
         offset_tics = [random.randint(1, offset) for offset in [20, 3, 5, 3]]
         coroutine = blink(canvas, row, column, offset_tics, symbol)
         coroutines.append(coroutine)
     coroutines.append(
-        fire(canvas, start_row=row_window-2, start_column=column_window/2)
+        fire(canvas, start_row=window_rows-2, start_column=window_columns/2)
     )
     coroutines.append(
         animate_spaceship(
             canvas,
             frames=frames,
-            row_window=row_window,
-            column_window=column_window
+            window_rows=window_rows,
+            window_columns=window_columns
         ),
     )
 
