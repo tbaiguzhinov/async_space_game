@@ -11,7 +11,7 @@ DOWN_KEY_CODE = 258
 BORDER_WIDTH = 2
 
 
-async def blink(canvas, row, column, symbol='*', offset_tics):
+async def blink(canvas, row, column, offset_tics, symbol='*'):
     """Display animation of a star with various blinking speed."""
     while True:
         for index, offset_tic in enumerate(offset_tics):
@@ -25,7 +25,7 @@ async def blink(canvas, row, column, symbol='*', offset_tics):
                 await asyncio.sleep(0)
 
 
-def get_random_star(row, column):
+def get_random_star_params(row, column):
     """Get a random star symbol with random row and column."""
     star_symbols = '+*.:'
     return random.randint(BORDER_WIDTH, row-BORDER_WIDTH), \
