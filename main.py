@@ -27,8 +27,12 @@ def draw(canvas):
         fire(canvas, start_row=row_window-2, start_column=column_window/2)
     )
     coroutines.append(
-        animate_spaceship(canvas, frames=frames,
-                          row_window=row_window, column_window=column_window),
+        animate_spaceship(
+            canvas,
+            frames=frames,
+            row_window=row_window,
+            column_window=column_window
+        ),
     )
 
     while True:

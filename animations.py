@@ -121,8 +121,7 @@ async def animate_spaceship(canvas, frames, row_window, column_window):
         row_limit = row_window - height
         column_limit = column_window - width
         for _ in range(2):
-            rows_direction, columns_direction, space_pressed = read_controls(
-                canvas)
+            rows_direction, columns_direction, space = read_controls(canvas)
             next_row = row + rows_direction
             next_column = column + columns_direction
             if 0 < next_row < row_limit:
